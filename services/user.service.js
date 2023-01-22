@@ -6,4 +6,5 @@ module.exports = {
   getUserById: (userId) => User.findById(userId),
   deleteUserById: (userId) => User.findByIdAndDelete(userId),
   updateUser: (userId, newData) => User.findByIdAndUpdate({ _id: userId }, newData, { new: true }),
+  findOneByParams: (filter = {}) => User.findOne(filter)
 };
