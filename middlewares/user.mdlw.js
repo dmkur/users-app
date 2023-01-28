@@ -15,5 +15,37 @@ module.exports = {
     } catch (e) {
       next(e);
     }
+  },
+  getUserDynemicaly: (from = 'body', field = 'email', dbField = field) => async (req, res, next) => {
+    try {
+      const fieldToSearch = req[from][field];
+
+      const user = await userService.findOneByParams({ [dbField]: fieldToSearch });
+
+      if (!user) next(new CustomErrorHandler('Not found', statusCodesEnum.NOT_FOUND));
+
+      req.user = user;
+
+      next();
+    } catch (e) {
+      next(e);
+    }
+  },
+  isUserPresent: (from = 'params') => async (req, res, next) => {
+    try {
+      const { userId } = req[from];
+
+      const user = await userService.getUserById(userId);
+
+      if (!user) {
+        return next(new CustomErrorHandler('Not found', statusCodesEnum.NOT_FOUND));
+      }
+
+      req.user = user;
+
+      next();
+    } catch (e) {
+      next(e);
+    }
   }
 };

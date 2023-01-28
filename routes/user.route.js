@@ -17,8 +17,10 @@ userRoute.post(
   userController.create
 );
 
-userRoute.get('/:userId', userController.getUserById);
-userRoute.put('/:userId', userController.getUserByIdAndUpdate);
-userRoute.delete('/:userId', userController.deleteById);
+userRoute.get('/:userId', userMdlwr.isUserPresent(), userController.getUserById);
+
+userRoute.put('/:userId', userMdlwr.isUserPresent(), userController.getUserByIdAndUpdate);
+
+userRoute.delete('/:userId', userMdlwr.isUserPresent(), userController.deleteById);
 
 module.exports = userRoute;
