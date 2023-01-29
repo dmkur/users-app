@@ -2,13 +2,18 @@ const { Router } = require('express');
 const { userController } = require('../controllers');
 const {
   userMdlwr,
-  commonMdlwr
+  commonMdlwr,
+  authMdlwr
 } = require('../middlewares');
 const { newUserValidator } = require('../validators/user.validator');
 
 const userRoute = Router();
 
-userRoute.get('/', userController.getAll);
+userRoute.get(
+  '/',
+  authMdlwr.checkIsAccessToken,
+  userController.getAll
+);
 
 userRoute.post(
   '/',
@@ -17,10 +22,24 @@ userRoute.post(
   userController.create
 );
 
-userRoute.get('/:userId', userMdlwr.isUserPresent(), userController.getUserById);
+userRoute.get(
+  '/:userId',
+  userMdlwr.isUserPresent(),
+  userController.getUserById
+);
 
-userRoute.put('/:userId', userMdlwr.isUserPresent(), userController.getUserByIdAndUpdate);
+userRoute.put(
+  '/:userId',
+  authMdlwr.checkIsAccessToken,
+  userMdlwr.isUserPresent(),
+  userController.getUserByIdAndUpdate
+);
 
-userRoute.delete('/:userId', userMdlwr.isUserPresent(), userController.deleteById);
+userRoute.delete(
+  '/:userId',
+  authMdlwr.checkIsAccessToken,
+  userMdlwr.isUserPresent(),
+  userController.deleteById
+);
 
 module.exports = userRoute;

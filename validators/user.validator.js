@@ -23,6 +23,12 @@ const newUserValidator = Joi.object({
   email: emailValidator.required()
 });
 
+const loginUserValidator = Joi.object({
+  password: passwordValidator.required(),
+  email: emailValidator.required()
+});
+
 module.exports = {
-  newUserValidator
+  newUserValidator,
+  loginUserValidator
 };
