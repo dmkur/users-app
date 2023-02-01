@@ -39,11 +39,11 @@ module.exports = {
 
       await authService.deleteOneByParams({ refresh_token });
 
-      const newAuthTokens = tokenService.createAuthTokens({ id: user });
+      const authTokens = tokenService.createAuthTokens({ _id: user });
 
-      await authService.saveTokens({ ...newAuthTokens, user });
+      const newTokens = await authService.saveTokens({ ...authTokens, user });
 
-      res.json(newAuthTokens);
+      res.json(newTokens);
     } catch (e) {
       next(e);
     }

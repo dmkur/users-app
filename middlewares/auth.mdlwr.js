@@ -44,7 +44,7 @@ module.exports = {
 
       tokenService.checkToken(refresh_token, tokenTypeEnum.REFRESH_TYPE);
 
-      const tokenInfo = await authService.getOneWithUser({ refresh_token });
+      const tokenInfo = await authService.getOneByParams({ refresh_token });
 
       if (!tokenInfo) {
         return next(new CustomErrorHandler('Token not Found', statusCodesEnum.UNAUTHORIZED));
