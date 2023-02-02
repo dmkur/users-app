@@ -10,7 +10,7 @@
     "jsonwebtoken": "^9.0.0"
   },
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node app.js"
   },
   "devDependencies": {
     "eslint": "^8.32.0",
