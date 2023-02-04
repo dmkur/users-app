@@ -30,7 +30,9 @@ app.use('*', (req, res, next) => {
 app.use(mainErrorHandler);
 app.listen(PORT, () => {
   console.log('App started on port,', PORT);
+
   mongoose.set('strictQuery', false);
   mongoose.connect(MONGO_URL);
+
   runCron();
 });
