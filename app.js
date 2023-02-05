@@ -2,6 +2,7 @@ const express = require('express');
 require('dotenv').config();
 // eslint-disable-next-line import/no-extraneous-dependencies
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const { PORT, MONGO_URL } = require('./config/config');
 const {
@@ -13,8 +14,9 @@ const { mainErrorHandler } = require('./errors');
 const runCron = require('./cron');
 
 const app = express();
-app.use(express.json());
 
+app.use(cors());
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/ping', (req, res,) => {
