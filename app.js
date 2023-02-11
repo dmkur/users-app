@@ -7,7 +7,8 @@ const cors = require('cors');
 const { PORT, MONGO_URL } = require('./config/config');
 const {
   userRoute,
-  authRoute
+  authRoute,
+  carRoute
 } = require('./routes');
 const { mainErrorHandler } = require('./errors');
 
@@ -22,9 +23,11 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/ping', (req, res,) => {
   res.json('pong');
 });
-app.use('/auth', authRoute);
 
+app.use('/auth', authRoute);
+app.use('/cars', carRoute);
 app.use('/users', userRoute);
+
 app.use('*', (req, res, next) => {
   next(new Error('Route not found'));
 });

@@ -30,7 +30,7 @@ module.exports = {
     try {
       const { userId } = req.params;
 
-      const updatedUser = await userService.updateUser(userId, req.body);
+      const updatedUser = await userService.updateUserById(userId, req.body);
 
       res.json(updatedUser);
     } catch (e) {

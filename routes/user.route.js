@@ -11,7 +11,7 @@ const userRoute = Router();
 
 userRoute.get(
   '/',
-  // authMdlwr.checkIsAccessToken,
+  authMdlwr.checkIsAccessToken,
   userController.getAll
 );
 
