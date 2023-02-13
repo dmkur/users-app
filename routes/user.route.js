@@ -11,7 +11,6 @@ const userRoute = Router();
 
 userRoute.get(
   '/',
-
   userController.getAll
 );
 
