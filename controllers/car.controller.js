@@ -28,4 +28,37 @@ module.exports = {
       next(e);
     }
   },
+  getCarById: async (req, res, next) => {
+    try {
+      const { carId } = req.params;
+
+      const cars = await carService.getCarById(carId);
+
+      res.json(cars);
+    } catch (e) {
+      next(e);
+    }
+  },
+  updateCarById: async (req, res, next) => {
+    try {
+      const { carId } = req.params;
+
+      const newCar = await carService.updateCarById(carId, req.body);
+
+      res.json(newCar);
+    } catch (e) {
+      next(e);
+    }
+  },
+  deleteCarById: async (req, res, next) => {
+    try {
+      const { carId } = req.params;
+
+      const newCar = await carService.deleteCarById(carId);
+
+      res.json(newCar);
+    } catch (e) {
+      next(e);
+    }
+  },
 };
