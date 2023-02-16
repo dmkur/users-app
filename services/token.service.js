@@ -37,7 +37,7 @@ module.exports = {
 
       return jwt.verify(token, secretWord);
     } catch (e) {
-      throw new CustomErrorHandler('Token not valid121212', statusCodesEnum.BAD_REQUEST);
+      throw new CustomErrorHandler('Token not valid', statusCodesEnum.UNAUTHORIZED);
     }
   }
 };
