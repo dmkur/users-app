@@ -36,7 +36,7 @@ module.exports = {
 
   checkIsRefreshToken: async (req, res, next) => {
     try {
-      const refresh_token = req.get(AUTHORIZATION);
+      const {refresh_token} = req.body;
 
       if (!refresh_token) {
         return next(new CustomErrorHandler('Token is absent', statusCodesEnum.UNAUTHORIZED));
