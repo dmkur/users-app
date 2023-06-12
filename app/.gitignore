@@ -1,8 +1,0 @@
-/.idea/
-/node_modules/
-package-lock.json
-/app.js
-/package.json
-/users-app.iml
-
-.env
