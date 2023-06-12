@@ -1,0 +1,53 @@
+version: '3.9'
+
+# тут стиль пайтону, все що в одному стовці - один блок
+services:
+# сервіси - це наші блоки back front db
+  appservice:
+  # назва сервіс бекенду
+    build:
+    # вказує образ з якого будуватись
+      context: .
+      # озн що . - на тому ж рівні знайде Dockerfile і візьме інфу
+#    ports:
+#    # щоб доступитися до 5000 ми пишемо любий порт через який нас перекине на 5000
+#      - '5000:5000'
+    volumes:
+    # підключаємо нашу папку з кодом до до нашого appService
+    # через ":" вказуємо де на appService буде зберігатися
+      - ./backend:/app
+      - /app/node_modules
+      # тут ми вказали що на appService в папці app буде папка node-modules
+      # але не копіююємо її з нашого бекенду оск вона у кожного своя буде
+    restart: on-failure
+    # опція коли рестарт робити
+    env_file:
+    # для докеру не потрібно в app.js прописувати dotenv тому видаляємо ці рядки
+    # і саму бібліотеку із package.json але файл залишаємо і вказуємо де брати ці змінні
+      - .env
+    command: >
+      sh -c "npm start"
+    # команда запуску
+
+#  db:
+#    # сервіс - db
+#    image: mongo
+#    # оск тут нічого не змінюємо вкзаали одразу який образ взяти mongo
+#    # дадаємо в env_file додаткові змінні MONGO_INITDB
+#    env_file:
+#      - .env
+##    ports:
+##      - "27018:27017"
+#    volumes:
+#      - ./mongo_db:/data/db
+#  #  також мусимо створити скрипт із правами юзера mongo-init
+#      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+  web:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    restart: on-failure
+    volumes:
+      - ./client:/user/share/nginx/html
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
