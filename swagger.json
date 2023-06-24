@@ -1,0 +1,43 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.6",
+    "title": "app-users",
+    "contact": "fgame@gmail.com"
+  },
+  "path": {
+    "/users/{userId}": {
+      "get": {
+        "desciption": "Get user by id",
+        "tags": "User",
+        "operationId": "get-user",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "default": "mongo-id example"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get user by id",
+            "schema": {
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "user@gmail.com"
+                },
+                "age": {
+                  "type": "integer",
+                  "example": 22
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
