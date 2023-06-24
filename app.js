@@ -3,6 +3,8 @@ require('dotenv').config();
 // eslint-disable-next-line import/no-extraneous-dependencies
 const mongoose = require('mongoose');
 const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 const { PORT, MONGO_URL } = require('./config/config');
 const {
@@ -27,6 +29,8 @@ app.get('/ping', (req, res,) => {
 app.use('/auth', authRoute);
 app.use('/cars', carRoute);
 app.use('/users', userRoute);
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('*', (req, res, next) => {
   next(new Error('Route not found'));
