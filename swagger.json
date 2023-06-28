@@ -3,13 +3,81 @@
   "info": {
     "version": "1.0.6",
     "title": "app-users",
-    "contact": "fgame@gmail.com"
+    "contact": "fgameua@gmail.com"
   },
-  "path": {
+  "paths": {
+    "/users": {
+      "post": {
+        "description": "Create user",
+        "tags": [
+          "users"
+        ],
+        "operationId": "create-user",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "formData",
+            "type": "string",
+            "description": "min 2 symbols",
+            "required": true
+          },
+          {
+            "name": "age",
+            "in": "formData",
+            "type": "integer",
+            "description": "min 7 years",
+            "required": false,
+            "minimum": 7,
+            "maximum": 150
+          },
+          {
+            "name": "email",
+            "in": "formData",
+            "type": "string",
+            "description": "It will be trimmed, lowercase",
+            "required": true
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "type": "string",
+            "description": "min 8 symbols",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "created new user",
+            "schema": {
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "mongo id example"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Den"
+                },
+                "age": {
+                  "type": "integer",
+                  "example": 18
+                },
+                "email": {
+                  "type": "string",
+                  "example": "shasha@gmail.com"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/users/{userId}": {
       "get": {
-        "desciption": "Get user by id",
-        "tags": "User",
+        "description": "Get user by id",
+        "tags": [
+          "users"
+        ],
         "operationId": "get-user",
         "parameters": [
           {
@@ -22,19 +90,41 @@
         ],
         "responses": {
           "200": {
-            "description": "Get user by id",
+            "description": "Get one user by ID",
             "schema": {
               "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "mongo-id example"
+                },
                 "email": {
                   "type": "string",
-                  "example": "user@gmail.com"
+                  "example": "user@email.com"
                 },
                 "age": {
                   "type": "integer",
-                  "example": 22
+                  "example": 18
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Den"
                 }
               }
             }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "delete user by ID",
+        "tags": [
+          "users"
+        ],
+        "responses": {
+          "200": {
+            "description": "delete user"
           }
         }
       }

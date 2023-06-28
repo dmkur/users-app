@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose');
 
 const userSchema = new Schema(
   {
@@ -8,7 +8,7 @@ const userSchema = new Schema(
     password: { type: String, trim: true, required: true },
     cars: {
       type: [Schema.Types.ObjectId],
-      ref: "car",
+      ref: 'car',
       select: false,
     },
   },
@@ -18,4 +18,4 @@ const userSchema = new Schema(
   }
 );
 
-module.exports = model("user", userSchema);
+module.exports = model('user', userSchema);
