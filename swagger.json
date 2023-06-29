@@ -5,7 +5,7 @@
     "title": "app-users",
     "contact": "fgame@gmail.com"
   },
-  "path": {
+  "paths": {
     "/users/{userId}": {
       "get": {
         "desciption": "Get user by id",
