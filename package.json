@@ -14,7 +14,7 @@
     "swagger-ui-express": "^4.6.3"
   },
   "scripts": {
-    "start": "node app.js"
+    "start": "nodemon app.js"
   },
   "devDependencies": {
     "eslint": "^8.32.0",

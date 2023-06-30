@@ -1,6 +1,6 @@
-const { carService } = require("../services");
-const { CustomErrorHandler } = require("../errors");
-const { statusCodesEnum } = require("../constants");
+const { carService } = require('../services');
+const { CustomErrorHandler } = require('../errors');
+const { statusCodesEnum } = require('../constants');
 
 module.exports = {
   isCarPresent: async (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports = {
 
       if (!car) {
         return next(
-          new CustomErrorHandler("Not found", statusCodesEnum.NOT_FOUND)
+          new CustomErrorHandler('Not found', statusCodesEnum.NOT_FOUND)
         );
       }
 
@@ -45,7 +45,7 @@ module.exports = {
       // }
       console.log(req.tokenInfo);
       console.log(req.car);
-      res.json("stop");
+      res.json('stop');
 
       // next();
     } catch (e) {
