@@ -7,6 +7,23 @@
   },
   "paths": {
     "/users": {
+      "get": {
+        "description": "all users",
+        "tags": [
+          "users"
+        ],
+        "operationId": "get-all-users",
+        "responses": {
+          "200": {
+            "description": "get all users",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/SingleUser"
+              }
+            }
+          }
+        }
+      },
       "post": {
         "description": "Create user",
         "tags": [
@@ -46,27 +63,10 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "created new user",
             "schema": {
-              "properties": {
-                "_id": {
-                  "type": "string",
-                  "example": "mongo id example"
-                },
-                "name": {
-                  "type": "string",
-                  "example": "Den"
-                },
-                "age": {
-                  "type": "integer",
-                  "example": 18
-                },
-                "email": {
-                  "type": "string",
-                  "example": "shasha@gmail.com"
-                }
-              }
+              "$ref": "#/definitions/SingleUser"
             }
           }
         }
@@ -81,6 +81,12 @@
         "operationId": "get-user",
         "parameters": [
           {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
             "name": "userId",
             "in": "path",
             "type": "string",
@@ -89,31 +95,17 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "Get one user by ID",
             "schema": {
-              "properties": {
-                "_id": {
-                  "type": "string",
-                  "example": "mongo-id example"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "user@email.com"
-                },
-                "age": {
-                  "type": "integer",
-                  "example": 18
-                },
-                "name": {
-                  "type": "string",
-                  "example": "Den"
-                }
-              }
+              "$ref": "#/definitions/SingleUser"
             }
           },
           "400": {
-            "description": "bad request"
+            "description": "bad request",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         }
       },
@@ -127,7 +119,65 @@
             "description": "delete user"
           }
         }
+      },
+      "put": {
+        "description": "update user by ID",
+        "operationId": "update-user-byId",
+        "tags": [
+          "users"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "default": "mongo-id example"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApiError": {
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 400,
+          "description": "status code"
+        },
+        "message": {
+          "type": "string",
+          "example": "som went wrong",
+          "description": "error message"
+        }
+      }
+    },
+    "SingleUser": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "mongo id example"
+        },
+        "name": {
+          "type": "string",
+          "example": "Den"
+        },
+        "age": {
+          "type": "integer",
+          "example": 18
+        },
+        "email": {
+          "type": "string",
+          "example": "shasha@gmail.com"
+        }
       }
     }
   }
 }
+
