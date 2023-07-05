@@ -1,13 +1,10 @@
-const {
-  carService,
-  userService
-} = require('../services');
-const { statusCodesEnum } = require('../constants');
+const { carService, userService } = require("../services");
+const { statusCodesEnum } = require("../constants");
 
 module.exports = {
   allCars: async (req, res, next) => {
     try {
-      const cars = await carService.getCarsByParams();
+      const cars = await carService.getCarsByParams(req.query);
 
       res.json(cars);
     } catch (e) {
